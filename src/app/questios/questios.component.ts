@@ -13,7 +13,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class QuestiosComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
-  timerConfig = { leftTime: 20, notify: [10] }; // assume timer
+  timerConfig = { leftTime: 60, notify: [30] }; // assume timer
   public loading = true;
   data: questionInfo[] = [];
   questionObj : any;

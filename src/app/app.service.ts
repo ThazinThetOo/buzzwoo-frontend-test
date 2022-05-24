@@ -20,7 +20,7 @@ export class AppService {
 
   getQuestions(): Observable<any> {
     // return this.http.get(`https://jsonplaceholder.typicode.com/posts`);
-    return this.http.get(`https://opentdb.com/api.php?amount=5&category=9&type=multiple`);
+    return this.http.get(`https://opentdb.com/api.php?amount=10&category=9&type=multiple`);
   }
 
   setArray(data: any){
