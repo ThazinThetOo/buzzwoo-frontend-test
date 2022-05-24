@@ -1,0 +1,32 @@
+
+  
+
+    <div *ngIf="action !== undefined && action === 'notify'" class="modal-body">
+      <div class="row">
+        <div class="col-auto">
+          <span class="fs-6 fw-bold p-3"><i class="fa fa-exclamation-triangle" style="color: red;"></i>&nbsp;&nbsp;
+            Your session will time out soon</span>
+        </div>
+      </div>
+      
+      
+      <p class="p-3">
+          Please choose one answer!
+          You will get more points if you can choose the correct answer between the time range.
+      </p>
+      <button type="button" class="close" aria-label="Close" (click)="close()">CLOSE</button>
+</div>
+
+<div *ngIf="action !== undefined && action === 'done'" class="modal-body">
+  <div class="row">
+    <span class="fs-6 fw-bold p-3"><i class="fa fa-exclamation-triangle" style="color: red;"></i>&nbsp;
+      Your session time out!</span>
+  </div>
+  <div class="row row justify-content-end">
+    <div class="col-auto">
+      <button type="button" class="close" aria-label="Close" (click)="close()">CLOSE</button>
+    </div>
+    
+  </div>
+  
+</div>

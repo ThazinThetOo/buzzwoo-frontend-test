@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row p-5">
+       <div class="col text-center">
+        
+            <h3 *ngIf="score == 1 || score > 1" class="fs-4">Good Job!</h3>
+            <h3 *ngIf="score == 0 || score < 0" class="fs-4">Sorry!</h3>
+            <h3 class="fs-4">Your Score is</h3>
+            <h1 class="fs-3 fw-bold">{{ score }}</h1>
+            <div class="row justify-content-center">
+                <div class="col-auto col-md-4 col-lg-4">
+                    <!-- <button type="button" style="letter-spacing: 1px;" class="btn btn-secondary btn-sm fs-6 fw-bold w-100" (click)="gotolanding()">PLAY AGAIN</button> -->
+                    <button type="button" style="letter-spacing: 2px; color: black;" class="btn btn-secondary btn-lg w-100 fs-5 fw-bold" (click)="gotolanding()">PLAY AGAIN</button>
+                </div>
+                <!-- <div class="col col-md-3">
+                    <button type="button" class="btn btn-secondary btn-lg w-100 fs-5 fw-bold" style="letter-spacing: 2px; color: black;" (click)="gotoQues()">START</button>
+                </div> -->
+            </div>
+            
+                
+        </div>
+    </div>
+    <p class="fs-5 p-2 text-uppercase fw-bold mt-3">results</p>
+    <ng-container *ngIf="data && data.length > 0">
+        <div class="row mb-3 p-2" *ngFor="let item of data; let i = index">
+            <div class="col fs-6 fw-bold">
+                <span>{{ i+1 }}.&nbsp;&nbsp; {{ item.question }}</span>
+                <ng-container *ngIf="item.difficulty == 'easy'">
+                    <i class="fa fa-star" style="color: gold;"></i>
+                </ng-container>
+                <ng-container *ngIf="item.difficulty == 'medium'">
+                    <i class="fa fa-star" style="color: gold;"></i><i class="fa fa-star" style="color: gold;"></i>
+                </ng-container>
+                <ng-container *ngIf="item.difficulty == 'hard'">
+                    <i class="fa fa-star" style="color: gold;"></i><i class="fa fa-star" style="color: gold;"></i><i class="fa fa-star" style="color: gold;"></i>
+                </ng-container>
+                <br>
+                <ng-container *ngIf="item.selected === item.correct_answer">
+                    <span class="ms-4">Your answer : {{ item.selected }}</span>
+                    <i class="fa fa-check-square ms-2" aria-hidden="true" style="color: green;"></i>
+                    <br>
+                </ng-container>
+                <ng-container *ngIf="item.selected !== item.correct_answer">
+                    <span class="ms-4">Your answer : {{ item.selected }}</span>
+                    <i class="fa fa-times ms-2" aria-hidden="true" style="color: red;"></i>
+                    <br>
+                </ng-container>
+                <ng-container *ngIf="item.selected !== item.correct_answer">
+                    <span class="ms-4">Correct answer : {{ item.correct_answer }}</span>
+                    <i class="fa fa-check-square ms-2" aria-hidden="true" style="color: green;"></i>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    
+</div>

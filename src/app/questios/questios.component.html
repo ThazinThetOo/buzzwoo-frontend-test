@@ -1,0 +1,71 @@
+<ng-container *ngIf="data && data.length > 0 && questionObj && questionObj.all_answer && questionObj.all_answer.length > 0">
+
+<div  class="container">
+    <div class="row align-items-center" style="height: 100vh;">
+        
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.03);">
+            <div class="card-body">
+                <div class="row float-end">
+                    <div class="col fs-6 fw-bold" style="color: red;">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <!-- <countdown #cd [config]="{leftTime: timeData}" (event)="handleEvent($event)"></countdown> -->
+                        <countdown #cd [config]="timerConfig" (event)="handleCountDown($event)"></countdown>
+                    </div>
+                </div>
+                
+                
+                <h3 class="card-title fs-5 fw-bold mt-3">{{ (questionObj && questionObj.question) ?  questionObj.question : '' }}
+                    <ng-container *ngIf="questionObj.difficulty == 'easy'">
+                        <i class="fa fa-star" style="color: green;"></i>
+                    </ng-container>
+                    <ng-container *ngIf="questionObj.difficulty == 'medium'">
+                        <i class="fa fa-star" style="color: gold;"></i><i class="fa fa-star" style="color: gold;"></i>
+                    </ng-container>
+                    <ng-container *ngIf="questionObj.difficulty == 'hard'">
+                        <i class="fa fa-star" style="color: red;"></i><i class="fa fa-star" style="color: red;"></i><i class="fa fa-star" style="color: red;"></i>
+                    </ng-container>
+                </h3>
+                <div class="row" *ngFor="let data of questionObj.all_answer">
+                    <div class="col">
+                            <input name="radio" type="radio" class="form-check-input"
+                             id="data.name" (click)="onValueChanges(data.name)" 
+                             [checked]="data.name == questionObj.selected"
+                             [value]="data.name">
+                            &nbsp;&nbsp;<label class="form-check-label" for="data.name">
+                                {{data.name}}
+                                </label>
+                    </div>
+                </div>
+                <div  *ngIf="deviceWidth > 280" class="row mb-0">
+                    <div class="col-5 col-md-2">
+                        <button *ngIf="index == 1 || index > 1"  type="button" class="btn w-100 fs-6 fw-normal" (click)="goBack()" style="letter-spacing: 1px;">BACK</button>
+                        
+                    </div>
+                    <div class="col col-md-8"></div>
+                    <div class="col-5 col-md-2">
+                        <button *ngIf="index < last_index" type="button" [disabled]="selected == ''" class="btn w-100 fs-6 fw-normal" (click)="gotoNextQues()" style="letter-spacing: 1px;">NEXT</button>
+                        <button *ngIf="index === last_index" type="button" [disabled]="selected == ''" class="btn w-100 fs-6 fw-normal" (click)="gotoResult()" style="letter-spacing: 1px;">FINISH</button>
+                    </div>
+                </div>
+                <div *ngIf="deviceWidth <= 280" class="row mt-2">
+                    <div class="col-12 mb-2">
+                        <button *ngIf="index == 1 || index > 1" type="button" class="btn btn-secondary btn-sm w-100 fs-5 fw-normal" (click)="goBack()" style="letter-spacing: 2px;">BACK</button>
+                    </div>
+                    <div class="col-12">
+                        <button *ngIf="index < last_index" type="button" [disabled]="selected == ''" class="btn btn-primary btn-sm btn w-100 fs-5 fw-normal" (click)="gotoNextQues()" style="letter-spacing: 2px;">NEXT</button>
+                        <button *ngIf="index === last_index" type="button" [disabled]="selected == ''" class="btn btn-primary btn-sm btn w-100 fs-5 fw-normal" (click)="gotoResult()" style="letter-spacing: 2px;">FINISH</button>
+                    </div>
+                </div>
+                <!-- Number of page -->
+                <div class="row mt-2 m-0 float-end">
+                    <div class="col-auto fw-bold" style="font-size: 12px;">
+                        {{ index + 1}} of {{ data.length }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
